@@ -90,22 +90,26 @@ python 03-merge_output_files.py
 
 ### 5. Optional: Automatic Reddit Image Poster
 
-If you want to automatically post scraped images to Reddit, use `03-Reddit Poster.py`.
+Use `03-Reddit Poster.py` for the fastest workflow: maintain `subreddits.txt` and `captions.txt`, then run once and let it post on schedule.
 
-1. Create a Reddit app and collect your API credentials from `https://www.reddit.com/prefs/apps`.
-2. Update the credentials and settings in `03-Reddit Poster.py`:
-   - `CLIENT_ID`, `CLIENT_SECRET`, `USERNAME`, `PASSWORD`, `USER_AGENT`
-   - `SUBREDDITS` (target communities)
-   - `CAPTIONS` (caption/title pool)
-   - `IMAGE_DIR` (folder containing images)
-3. Keep `DRY_RUN = True` for testing, then switch to `False` when ready to publish.
-4. Run:
+1. Create a Reddit app and collect credentials from `https://www.reddit.com/prefs/apps`.
+2. Set credentials in `03-Reddit Poster.py` (`CLIENT_ID`, `CLIENT_SECRET`, `USERNAME`, `PASSWORD`, `USER_AGENT`).
+3. Prepare files:
+   - `subreddits.txt`: one subreddit per line (without `r/`).
+   - `captions.txt`: one caption per line (add as many as you want, e.g. 120 lines).
+4. Choose scheduling mode:
+   - **Easy mode**: set `POST_EVERY_MINUTES`, optional `RANDOM_JITTER_SECONDS`, optional `START_AT_UTC`.
+   - **Exact mode**: set `USE_SCHEDULE_CSV = True` and provide `schedule.csv` with columns:
+     `image_filename,subreddit,caption,post_at_utc`.
+5. Keep `DRY_RUN = True` to test, then set `False` for real posting.
+
+Run:
 
 ```sh
 python 03-Reddit Poster.py
 ```
 
-The script picks a subreddit and caption at random for each image, posts it, and logs posted filenames in `posted_images.txt` so it does not repost the same file.
+The script tracks posted files in `posted_images.txt` to prevent reposting.
 
 ## Configuration
 
