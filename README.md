@@ -158,3 +158,34 @@ Contributions are welcome! Please feel free to submit a pull request or open an 
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 *This code and documentation were written by [Amir Jamali](https://github.com/Amirwpi).*
+
+
+### 6. Manual Reddit Planner UI (Fastest mobile-like workflow)
+
+Run:
+
+```sh
+streamlit run "04-Reddit Manual Planner.py"
+```
+
+This gives a simple UI where you:
+1. Upload one image.
+2. Pick title groups (each group has many variants; one is randomly selected per row).
+3. Pick subreddits.
+4. Click **Generate Plan** and use **Open Reddit compose** buttons.
+
+Prepare files:
+- `subreddits.txt` (one subreddit per line)
+- `title_variants.txt` using this format:
+
+```txt
+[Compliment]
+Looking sharp today
+Feeling confident
+
+[Casual]
+Just dropping by
+Weekend vibe
+```
+
+Note: Reddit submit links can prefill the title, but browsers cannot auto-attach a local image file for security reasons.
