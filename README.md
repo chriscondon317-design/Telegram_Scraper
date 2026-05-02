@@ -86,6 +86,31 @@ python 03-merge_output_files.py
 ##Hasn't uploaded but I will add this part as well
 
 
+
+
+### 5. Optional: Automatic Reddit Image Poster
+
+Use `03-Reddit Poster.py` for the fastest workflow: maintain `subreddits.txt` and `captions.txt`, then run once and let it post on schedule.
+
+1. Create a Reddit app and collect credentials from `https://www.reddit.com/prefs/apps`.
+2. Set credentials in `03-Reddit Poster.py` (`CLIENT_ID`, `CLIENT_SECRET`, `USERNAME`, `PASSWORD`, `USER_AGENT`).
+3. Prepare files:
+   - `subreddits.txt`: one subreddit per line (without `r/`).
+   - `captions.txt`: one caption per line (add as many as you want, e.g. 120 lines).
+4. Choose scheduling mode:
+   - **Easy mode**: set `POST_EVERY_MINUTES`, optional `RANDOM_JITTER_SECONDS`, optional `START_AT_UTC`.
+   - **Exact mode**: set `USE_SCHEDULE_CSV = True` and provide `schedule.csv` with columns:
+     `image_filename,subreddit,caption,post_at_utc`.
+5. Keep `DRY_RUN = True` to test, then set `False` for real posting.
+
+Run:
+
+```sh
+python 03-Reddit Poster.py
+```
+
+The script tracks posted files in `posted_images.txt` to prevent reposting.
+
 ## Configuration
 
 Before running the scraper, customize the following settings in `main_scraper.py`:
@@ -133,3 +158,34 @@ Contributions are welcome! Please feel free to submit a pull request or open an 
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 *This code and documentation were written by [Amir Jamali](https://github.com/Amirwpi).*
+
+
+### 6. Manual Reddit Planner UI (Fastest mobile-like workflow)
+
+Run:
+
+```sh
+streamlit run "04-Reddit Manual Planner.py"
+```
+
+This gives a simple UI where you:
+1. Upload one image.
+2. Pick title groups (each group has many variants; one is randomly selected per row).
+3. Pick subreddits.
+4. Click **Generate Plan** and use **Open Reddit compose** buttons.
+
+Prepare files:
+- `subreddits.txt` (one subreddit per line)
+- `title_variants.txt` using this format:
+
+```txt
+[Compliment]
+Looking sharp today
+Feeling confident
+
+[Casual]
+Just dropping by
+Weekend vibe
+```
+
+Note: Reddit submit links can prefill the title, but browsers cannot auto-attach a local image file for security reasons.
