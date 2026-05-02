@@ -86,6 +86,27 @@ python 03-merge_output_files.py
 ##Hasn't uploaded but I will add this part as well
 
 
+
+
+### 5. Optional: Automatic Reddit Image Poster
+
+If you want to automatically post scraped images to Reddit, use `03-Reddit Poster.py`.
+
+1. Create a Reddit app and collect your API credentials from `https://www.reddit.com/prefs/apps`.
+2. Update the credentials and settings in `03-Reddit Poster.py`:
+   - `CLIENT_ID`, `CLIENT_SECRET`, `USERNAME`, `PASSWORD`, `USER_AGENT`
+   - `SUBREDDITS` (target communities)
+   - `CAPTIONS` (caption/title pool)
+   - `IMAGE_DIR` (folder containing images)
+3. Keep `DRY_RUN = True` for testing, then switch to `False` when ready to publish.
+4. Run:
+
+```sh
+python 03-Reddit Poster.py
+```
+
+The script picks a subreddit and caption at random for each image, posts it, and logs posted filenames in `posted_images.txt` so it does not repost the same file.
+
 ## Configuration
 
 Before running the scraper, customize the following settings in `main_scraper.py`:
